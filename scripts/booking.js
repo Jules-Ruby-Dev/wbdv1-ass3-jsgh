@@ -11,24 +11,19 @@ const rates = {
 
 // Initialize currentRate
 let currentRate = rates['full'];
-console.log(currentRate);
 // Create a set to hold days selected
 // This will enforce unique values
 const daysSelected = new Set();
 // store NodeList of weekday button elements
 const dayBtns = document.querySelectorAll('.day-selector li');
-console.log(dayBtns);
 
 // store half/full day button elements
 const rateBtns = [
 	document.getElementById('half'),
 	document.getElementById('full'),
 ];
-console.log(rateBtns);
-console.log(rateBtns.length);
 
 const clearBtn = document.getElementById('clear-button');
-console.log(clearBtn);
 
 const costEl = document.getElementById('calculated-cost');
 
@@ -42,17 +37,16 @@ const toggleClicked = eventTarget => {
 	console.log(rateBtns.includes(eventTarget));
 
 	if (rateBtns.includes(eventTarget)) {
-		// if
+		if (!eventTarget.classList.contains('')) {
+			currentRate = rates[eventTarget.textContent];
+		}
 	} else {
 		eventTarget.classList.toggle('clicked');
 
 		if (daysSelected.has(eventTarget.textContent)) {
-			console.log(eventTarget.textContent);
 			daysSelected.delete(eventTarget.textContent);
-			console.log(daysSelected);
 		} else {
 			daysSelected.add(eventTarget.textContent);
-			console.log(daysSelected);
 		}
 	}
 };
