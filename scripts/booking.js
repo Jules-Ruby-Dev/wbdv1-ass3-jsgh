@@ -33,23 +33,19 @@ const costEl = document.getElementById('calculated-cost');
 // when the day buttons are clicked, we will apply the "clicked" class to that element, and update any other relevant variables. Then, we can recalculate the total cost.
 // added challenge: don't update the dayCounter if the same day is clicked more than once. hint: .classList.contains() might be helpful here!
 const toggleClicked = eventTarget => {
-
-  if (rateBtns.includes(eventTarget)) {
-
+	if (rateBtns.includes(eventTarget)) {
 		if (!eventTarget.classList.contains('clicked')) {
-			console.log('hello');
 			currentRate = rates[eventTarget.textContent];
 
 			rateBtns.forEach(btn => {
 				btn.classList.toggle('clicked');
 			});
-    }
+		}
 	} else {
 		eventTarget.classList.toggle('clicked');
 
 		if (daysSelected.has(eventTarget.textContent)) {
-      daysSelected.delete(eventTarget.textContent);
-      
+			daysSelected.delete(eventTarget.textContent);
 		} else {
 			daysSelected.add(eventTarget.textContent);
 		}
@@ -84,7 +80,6 @@ for (const btn of dayBtns) {
 }
 
 rateBtns.forEach(btn => {
-	console.log(btn);
 	btn.addEventListener('click', ({ target }) => {
 		toggleClicked(target);
 		calculate();
