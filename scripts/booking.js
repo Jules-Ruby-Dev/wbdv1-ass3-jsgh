@@ -37,8 +37,13 @@ const toggleClicked = eventTarget => {
 	console.log(rateBtns.includes(eventTarget));
 
 	if (rateBtns.includes(eventTarget)) {
-		if (!eventTarget.classList.contains('')) {
+		if (!eventTarget.classList.contains('clicked')) {
+			console.log('hello');
 			currentRate = rates[eventTarget.textContent];
+
+			rateBtns.forEach(btn => {
+				btn.classList.toggle('clicked');
+			});
 		}
 	} else {
 		eventTarget.classList.toggle('clicked');
