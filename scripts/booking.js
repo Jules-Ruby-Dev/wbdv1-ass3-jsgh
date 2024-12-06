@@ -10,7 +10,7 @@ const rates = {
 };
 
 // Initialize currentRate
-let currentRate = rates['full'];
+let currentRate = rates.full;
 // Create a set to hold days selected
 // This will enforce unique values
 const daysSelected = new Set();
