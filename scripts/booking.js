@@ -79,6 +79,8 @@ const calculate = () => {
 	costEl.innerText = calculatedCost;
 };
 
+// for (const <item> of <iterable>) is a loop that can be used with an iterable object
+// dayBtns is a Set(), which is a specific kind of iterable that has acces to a forEach(), I used for...of basically because I hadn't in a while, and for this context it doesn't matter which loop I used, however for...of becomes really iniefficient when you start looping HUGE amounts of data, so don't do that basically stop using it for anything nearing 1000 + values
 for (const btn of dayBtns) {
 	btn.addEventListener('click', ({ target }) => {
 		toggleClicked(target);
@@ -86,6 +88,7 @@ for (const btn of dayBtns) {
 	});
 }
 
+// I used forEach here because why not, and also it has a prettier syntax, also accessible through iterators
 rateBtns.forEach(btn => {
 	btn.addEventListener('click', ({ target }) => {
 		toggleClicked(target);
