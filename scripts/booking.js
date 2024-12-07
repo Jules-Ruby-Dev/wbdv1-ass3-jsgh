@@ -11,8 +11,7 @@ const rates = {
 
 // Initialize currentRate
 let currentRate = rates.full;
-// Create a set to hold days selected
-// This will enforce unique values
+// Create a set to hold unique day values
 const daysSelected = new Set();
 // store NodeList of weekday button elements
 const dayBtns = document.querySelectorAll('.day-selector li');
@@ -22,9 +21,7 @@ const rateBtns = [
 	document.getElementById('half'),
 	document.getElementById('full'),
 ];
-
 const clearBtn = document.getElementById('clear-button');
-
 const costEl = document.getElementById('calculated-cost');
 
 // console.log(halfDayBtn, fullDayBtn);
@@ -32,21 +29,28 @@ const costEl = document.getElementById('calculated-cost');
 /********* colour change days of week *********/
 // when the day buttons are clicked, we will apply the "clicked" class to that element, and update any other relevant variables. Then, we can recalculate the total cost.
 // added challenge: don't update the dayCounter if the same day is clicked more than once. hint: .classList.contains() might be helpful here!
-const toggleClicked = eventTarget => {
-	if (rateBtns.includes(eventTarget)) {
-		if (!eventTarget.classList.contains('clicked')) {
-			currentRate = rates[eventTarget.textContent];
 
+const toggleClicked = eventTarget => {
+	// Check to see if the clicked button is a rate-change button
+	if (rateBtns.includes(eventTarget)) {
+		// if so, is it one that is already clicked
+		if (!eventTarget.classList.contains('clicked')) {
+			// if not, change the rate to this one
+			currentRate = rates[eventTarget.textContent];
+			// then trigger a toggle for the clicked class on each button
 			rateBtns.forEach(btn => {
 				btn.classList.toggle('clicked');
 			});
 		}
 	} else {
+		// if not a rate-change button then toggle the clicked class on the event target
 		eventTarget.classList.toggle('clicked');
 
+		// if days selected Set aalready contains this day, remove it from the set
 		if (daysSelected.has(eventTarget.textContent)) {
 			daysSelected.delete(eventTarget.textContent);
 		} else {
+			// Otherwise add it to the set
 			daysSelected.add(eventTarget.textContent);
 		}
 	}
@@ -54,7 +58,9 @@ const toggleClicked = eventTarget => {
 
 /********* clear days *********/
 // when the clear-button is clicked, the "clicked" class is removed from all days, any other relevant variables are reset, and the calculated cost is set to 0.
+
 const clearDays = () => {
+	// clear set of all days
 	daysSelected.clear();
 };
 
@@ -67,6 +73,7 @@ const clearDays = () => {
 // when a calculation is needed, set the innerHTML of the calculated-cost element to the appropriate value
 
 const calculate = () => {
+	// take the size attribuute of the days Set, ,multiply it by the rate
 	const days = daysSelected.size;
 	const calculatedCost = days * currentRate;
 	costEl.innerText = calculatedCost;
